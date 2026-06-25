@@ -67,4 +67,91 @@ public class Pedido {
     public void cancelar() {
         estado.cancelar(this);
     }
+    
+    // Los estados concretos llaman a los siguientes métodos para ejecutar la lógica
+    // de dominio (stock, reembolso) antes de cambiar de estado.
+
+    public void cambiarEstado(EstadoPedido nuevoEstado) { // único método donde el estado cambia
+        EstadoPedido anterior = this.estado;
+        this.estado = nuevoEstado;
+        notificar(anterior);
+    }
+
+    // Decrementa el stock de todos los ítems del pedido.
+    public void decrementarStock() {
+        // El stock real vive en el catálogo/depósito.
+        // Acá se delega al ítem para que maneje su propio stock.
+        for (LineaPedido linea : items) {
+            linea.getItem().decrementarStock(linea.getCantidad());
+        }
+    }
+
+    // Repone el stock de todos los ítems (usado al cancelar desde CONFIRMADO).
+    public void reponerStock() {
+        for (LineaPedido linea : items) {
+            linea.getItem().incrementarStock(linea.getCantidad());
+        }
+    }
+
+    // Genera y registra una nota de crédito por el monto indicado.
+    public void generarNotaCredito(float monto) {
+        notasCredito.add(new NotaCredito(monto, "Cancelación de pedido " + id));
+    }
+
+    // Cálculos de totales
+
+    // Suma de todos los ítems sin costo de envío. 
+    public float getSubtotalProductos() {
+        return (float) items.stream()
+                .mapToDouble(LineaPedido::getSubtotal)
+                .sum();
+    }
+
+    // Total completo: productos + envío.
+    public float getTotal() {
+        float costoEnvio = (metodoEnvio != null)
+                ? metodoEnvio.calcularCosto(this)
+                : 0f;
+        return getSubtotalProductos() + costoEnvio;
+    }
+
+    // Peso total para el cálculo de envío estándar.
+    public float getPesoTotal() {
+        return (float) items.stream()
+                .mapToDouble(l -> {
+                    Object peso = l.getItem().getAtributo("peso");
+                    return (peso instanceof Number) ? ((Number) peso).floatValue() * l.getCantidad() : 0;
+                })
+                .sum();
+    }
+
+    // FALTA OBSERVER 
+    
+    // Getters
+
+    public String getId() { return id; }
+
+    public Cliente getCliente() { return cliente; }
+
+    public EstadoPedido getEstado() { return estado; }
+
+    public List<LineaPedido> getItems() {
+        return Collections.unmodifiableList(items);
+    }
+
+    public List<NotaCredito> getNotasCredito() {
+        return Collections.unmodifiableList(notasCredito);
+    }
+
+    public MetodoEnvio getMetodoEnvio() { return metodoEnvio; }
+
+    public void setMetodoEnvio(MetodoEnvio metodoEnvio) {
+        this.metodoEnvio = metodoEnvio;
+    }
+
+    public ProcesadorPago getProcesadorPago() { return procesadorPago; }
+
+    public void setProcesadorPago(ProcesadorPago procesadorPago) {
+        this.procesadorPago = procesadorPago;
+    }
 }
