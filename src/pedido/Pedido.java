@@ -7,6 +7,8 @@ import notificaciones.Observador;
 import pagos.ProcesadorPago;
 import pedido.EstadoBorrador;
 import pedido.EstadoPedido;
+
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 
@@ -34,11 +36,17 @@ public class Pedido {
     private EstadoPedido estado;
     private MetodoEnvio metodoEnvio;
     private ProcesadorPago procesadorPago;
+    
+    private final LocalDate fechaCreacion;
+    private LocalDate fechaConfirmacion;
+    private LocalDate fechaEntrega;
+    private LocalDate fechaCancelacion;
 
     public Pedido(String id, Cliente cliente) {
         this.id = id;
         this.cliente = cliente;
         this.estado = new EstadoBorrador(); // todo pedido arranca en borrador
+        this.fechaCreacion = LocalDate.now();
     }
 
     // Cada método delega en el estado actual.
@@ -115,23 +123,44 @@ public class Pedido {
 
     // Total completo: productos + envío.
     public float getTotal() {
-        float costoEnvio = (metodoEnvio != null)
-                ? metodoEnvio.calcularCosto(this)
-                : 0f;
-        return getSubtotalProductos() + costoEnvio;
+        return getSubtotalProductos() + getCostoEnvio();
     }
 
     // Peso total para el cálculo de envío estándar.
     public float getPesoTotal() {
         return (float) items.stream()
                 .mapToDouble(l -> {
-                    Object peso = l.getItem().getAtributo("peso");
+                    Object peso = l.getItem().getPeso();
                     return (peso instanceof Number) ? ((Number) peso).floatValue() * l.getCantidad() : 0;
                 })
                 .sum();
     }
 
-    // FALTA OBSERVER 
+    // Observer: suscripción y notificación
+
+    public void suscribir(Observador observador) {
+        observadores.add(observador);
+    }
+
+    public void desuscribir(Observador observador) {
+        observadores.remove(observador);
+    }
+
+    /*
+       Notifica a todos los observadores del cambio de estado.
+       Pedido no sabe qué hace cada observador, solo les avisa.
+     */
+    public void notificar(EstadoPedido estadoAnterior) {
+        for (Observador o : observadores) {
+            o.actualizar(this, estadoAnterior, this.estado);
+        }
+    }
+    
+    // Setters de fechas (llamados por los estados)
+    
+    public void registrarFechaConfirmacion() { this.fechaConfirmacion = LocalDate.now(); }
+    public void registrarFechaEntrega()      { this.fechaEntrega = LocalDate.now(); }
+    public void registrarFechaCancelacion()  { this.fechaCancelacion = LocalDate.now(); }
     
     // Getters
 
@@ -150,6 +179,8 @@ public class Pedido {
     }
 
     public MetodoEnvio getMetodoEnvio() { return metodoEnvio; }
+    
+    public LocalDate getFechaEntrega() { return fechaEntrega; }
 
     public void setMetodoEnvio(MetodoEnvio metodoEnvio) {
         this.metodoEnvio = metodoEnvio;

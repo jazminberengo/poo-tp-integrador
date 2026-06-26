@@ -1,5 +1,18 @@
 package busqueda;
 
-public class NombreContiene {
+import catalogo.ItemCatalogo;
+
+public class NombreContiene implements CriterioBusqueda {
+
+	private String texto;
+	
+	public NombreContiene(String texto) {
+		this.texto = texto;
+	}
+	
+	@Override
+	public boolean cumple(ItemCatalogo item) {
+		return item.nombre.contains(texto);
+	}
 
 }
