@@ -1,6 +1,12 @@
 package pedido;
 
 import java.util.ArrayList;
+import catalogo.ItemCatalogo;
+import envio.MetodoEnvio;
+import notificaciones.Observador;
+import pagos.ProcesadorPago;
+import pedido.EstadoBorrador;
+import pedido.EstadoPedido;
 import java.util.Collections;
 import java.util.List;
 
