@@ -20,12 +20,14 @@ public class EstadoBorrador implements EstadoPedido {
     public void confirmar(Pedido pedido) {
         // Decrementa el stock de cada ítem y avanza al siguiente estado
         pedido.decrementarStock();
+        pedido.registrarFechaConfirmacion();
         pedido.cambiarEstado(new EstadoConfirmado());
     }
 
     @Override
     public void cancelar(Pedido pedido) {
         // Desde borrador no hay stock que reponer ni reembolso
+    	pedido.registrarFechaCancelacion();
         pedido.cambiarEstado(new EstadoCancelado());
     }
 }
