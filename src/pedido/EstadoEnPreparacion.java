@@ -1,10 +1,8 @@
-package unqshop.pedido.estado;
+package pedido;
 
-import unqshop.pedido.Pedido;
-
-/**
- * EN_PREPARACION: el depósito está preparando el envío.
- * Solo puede avanzar a ENVIADO. No puede cancelarse según la consigna.
+/*
+   EN_PREPARACION: el depósito está preparando el envío.
+   Solo puede avanzar a ENVIADO. No puede cancelarse.
  */
 public class EstadoEnPreparacion implements EstadoPedido {
 

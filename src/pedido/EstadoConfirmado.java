@@ -1,10 +1,8 @@
-package unqshop.pedido.estado;
+package pedido;
 
-import unqshop.pedido.Pedido;
-
-/**
- * CONFIRMADO: el cliente confirmó. El stock ya fue decrementado.
- * Si se cancela desde acá: se repone el stock y se reembolsa todo (productos + envío).
+/*
+   CONFIRMADO: el cliente confirmó. El stock ya fue decrementado.
+   Si se cancela desde acá: se repone el stock y se reembolsa todo (productos + envío).
  */
 public class EstadoConfirmado implements EstadoPedido {
 

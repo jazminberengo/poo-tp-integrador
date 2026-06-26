@@ -1,10 +1,8 @@
-package unqshop.pedido.estado;
+package pedido;
 
-import unqshop.pedido.Pedido;
-
-/**
- * BORRADOR: el cliente está armando el pedido.
- * Únicas operaciones válidas: agregar/quitar ítems, confirmar, cancelar.
+/*
+   BORRADOR: el cliente está armando el pedido.
+   Únicas operaciones válidas: agregar/quitar ítems, confirmar, cancelar.
  */
 public class EstadoBorrador implements EstadoPedido {
 

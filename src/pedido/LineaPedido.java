@@ -1,13 +1,13 @@
-package unqshop.pedido;
+package pedido;
 
-import unqshop.catalogo.ItemCatalogo;
+import catalogo.ItemCatalogo;
 
-/**
- * Representa una línea dentro de un pedido: un ítem con su cantidad
- * y el precio unitario al momento de la compra (snapshot).
- *
- * Guardar el precio acá es importante: si el precio del producto cambia
- * después, el pedido no se ve afectado.
+/*
+   Representa una línea dentro de un pedido: un ítem con su cantidad
+   y el precio unitario al momento de la compra.
+  
+   Se guarda el precio acá porque si el precio del producto cambia
+   después, el pedido no se ve afectado.
  */
 public class LineaPedido {
 

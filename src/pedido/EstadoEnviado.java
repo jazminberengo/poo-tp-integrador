@@ -1,10 +1,8 @@
-package unqshop.pedido.estado;
+package pedido;
 
-import unqshop.pedido.Pedido;
-
-/**
- * ENVIADO: el paquete está en camino.
- * Si se cancela acá: solo se reembolsan los productos, NO el costo de envío.
+/*
+   ENVIADO: el paquete está en camino.
+   Si se cancela acá: solo se reembolsan los productos, NO el costo de envío.
  */
 public class EstadoEnviado implements EstadoPedido {
 

@@ -1,13 +1,13 @@
-package unqshop.pedido;
+package pedido;
 
 import java.time.LocalDate;
 
-/**
- * Representa un reembolso emitido cuando un pedido se cancela.
- *
- * El monto varía según desde qué estado se cancela:
- * - Desde CONFIRMADO: reembolso total (productos + envío)
- * - Desde ENVIADO:    reembolso parcial (solo productos)
+/*
+   Representa un reembolso emitido cuando un pedido se cancela.
+  
+   El monto varía según desde qué estado se cancela:
+   - Desde CONFIRMADO: reembolso total (productos + envío)
+   - Desde ENVIADO:    reembolso parcial (solo productos)
  */
 public class NotaCredito {
 
