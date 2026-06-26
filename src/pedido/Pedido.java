@@ -136,7 +136,25 @@ public class Pedido {
                 .sum();
     }
 
-    // FALTA OBSERVER 
+    // Observer: suscripción y notificación
+
+    public void suscribir(Observador observador) {
+        observadores.add(observador);
+    }
+
+    public void desuscribir(Observador observador) {
+        observadores.remove(observador);
+    }
+
+    /*
+       Notifica a todos los observadores del cambio de estado.
+       Pedido no sabe qué hace cada observador, solo les avisa.
+     */
+    public void notificar(EstadoPedido estadoAnterior) {
+        for (Observador o : observadores) {
+            o.actualizar(this, estadoAnterior, this.estado);
+        }
+    }
     
     // Setters de fechas (llamados por los estados)
     
