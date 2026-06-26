@@ -16,6 +16,7 @@ public class EstadoConfirmado implements EstadoPedido {
         // Viene de CONFIRMADO: hay que reponer stock y reembolsar todo
         pedido.reponerStock();
         pedido.generarNotaCredito(pedido.getTotal()); // reembolso total
+        pedido.registrarFechaCancelacion();
         pedido.cambiarEstado(new EstadoCancelado());
     }
 }

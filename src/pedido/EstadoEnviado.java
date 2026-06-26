@@ -8,6 +8,7 @@ public class EstadoEnviado implements EstadoPedido {
 
     @Override
     public void entregar(Pedido pedido) {
+    	pedido.registrarFechaEntrega();
         pedido.cambiarEstado(new EstadoEntregado());
     }
 
@@ -15,6 +16,7 @@ public class EstadoEnviado implements EstadoPedido {
     public void cancelar(Pedido pedido) {
         // Reembolso parcial: solo el subtotal de productos, no el envío
         pedido.generarNotaCredito(pedido.getSubtotalProductos());
+        pedido.registrarFechaCancelacion();
         pedido.cambiarEstado(new EstadoCancelado());
     }
 }
