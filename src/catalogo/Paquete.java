@@ -9,6 +9,13 @@ public class Paquete extends ItemCatalogo{
 
 	public Float descuento;
 	public ArrayList<ItemCatalogo> items;
+
+	public Paquete(	String nombre, String descripcion) {
+		super(nombre, descripcion);
+		items = new ArrayList<ItemCatalogo>();
+	}
+	
+	public void setDescuento( Float descuento ) { this.descuento = descuento; }
 	
 	@Override
 	public void aceptar(ReporteVisitor visitor) {

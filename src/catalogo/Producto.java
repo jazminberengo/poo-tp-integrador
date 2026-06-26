@@ -1,6 +1,7 @@
 package catalogo;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import reportes.ReporteVisitor;
 
@@ -13,19 +14,25 @@ public class Producto extends ItemCatalogo{
 	public Float  descuento;
 	public Map<String, Object> atributos;
 	
+	public Producto(String nombre, String descripcion, 
+					String sku, Float precio ) {
+        super(nombre, descripcion);
+        this.sku = sku;
+        this.precio = precio;
+        this.atributos = new HashMap<>(); 
+    }
 	
+	public void setMarca( String marca ) {	this.marca = marca; }
+	public void setCategoria( String categoria ) { this.categoria = categoria; }
+	public void setDescuento( Float descuento ) { this.descuento = descuento; }
 	
 	@Override
 	public void aceptar(ReporteVisitor visitor) {
-			
 		visitor.visitarProducto( this );
 	}
 
-
-
 	@Override
-	public boolean validar() {
-		
+	public boolean validar() {	
 		ArrayList<String> atributosInvalidos = new ArrayList<String>();
 		
 		if ( nombre == null ) 		{	atributosInvalidos.add("nombre"); }
@@ -49,8 +56,6 @@ public class Producto extends ItemCatalogo{
 		atributosInvalidos.forEach( v -> System.out.println(v) );
 		return false;
 	}
-
-
 
 	@Override
 	public float getPrecioBase() {
