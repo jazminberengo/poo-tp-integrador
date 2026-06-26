@@ -179,6 +179,8 @@ public class Pedido {
     }
 
     public MetodoEnvio getMetodoEnvio() { return metodoEnvio; }
+    
+    public LocalDate getFechaEntrega() { return fechaEntrega; }
 
     public void setMetodoEnvio(MetodoEnvio metodoEnvio) {
         this.metodoEnvio = metodoEnvio;
