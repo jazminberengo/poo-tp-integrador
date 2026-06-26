@@ -1,8 +1,9 @@
 package catalogo;
 
 import java.util.ArrayList;
+import java.util.List;
 
-
+import reportes.Entrada;
 import reportes.ReporteVisitor;
 
 public class Paquete extends ItemCatalogo{
@@ -17,12 +18,6 @@ public class Paquete extends ItemCatalogo{
 	
 	public void setDescuento( Float descuento ) { this.descuento = descuento; }
 	
-	@Override
-	public void aceptar(ReporteVisitor visitor) {
-		
-		visitor.visitarPaquete( this );
-	}
-
 	@Override
 	public boolean validar() {
 		if ( nombre == null ) {
@@ -50,5 +45,44 @@ public class Paquete extends ItemCatalogo{
 		
 		return (float) (sumaItems * ( 1 - ( descuento.floatValue() / 100 ) ));
 	}
+
+	@Override
+	public float getPeso() {
+		
+		return (float) items.stream().
+						mapToDouble( i -> i.getPeso() ).
+						sum();
+	}
+	
+	public List<Entrada> getListEntrada(int cantidadLineaPedido) {
+		
+		List<Entrada> entradas =  new ArrayList<Entrada>();
+		
+		for (ItemCatalogo item : items) {
+	        List<Entrada> entradasDelItem = item.getListEntrada(cantidadLineaPedido);
+	        entradas.addAll(entradasDelItem);
+		}
+		return entradas;
+	}
+	
+	//Visitor Pattern
+	@Override
+	public void aceptar(ReporteVisitor visitor) {
+		
+		visitor.visitarPaquete( this );
+	}
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

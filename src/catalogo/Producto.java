@@ -1,8 +1,11 @@
 package catalogo;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
+
+import reportes.Entrada;
 import reportes.ReporteVisitor;
 
 public class Producto extends ItemCatalogo{
@@ -12,13 +15,15 @@ public class Producto extends ItemCatalogo{
 	public String categoria;
 	public Float  precio;
 	public Float  descuento;
+	public Float  peso;
 	public Map<String, Object> atributos;
 	
 	public Producto(String nombre, String descripcion, 
-					String sku, Float precio ) {
+					String sku, Float precio, Float peso ) {
         super(nombre, descripcion);
         this.sku = sku;
         this.precio = precio;
+        this.peso = peso;
         this.atributos = new HashMap<>(); 
     }
 	
@@ -26,11 +31,6 @@ public class Producto extends ItemCatalogo{
 	public void setCategoria( String categoria ) { this.categoria = categoria; }
 	public void setDescuento( Float descuento ) { this.descuento = descuento; }
 	
-	@Override
-	public void aceptar(ReporteVisitor visitor) {
-		visitor.visitarProducto( this );
-	}
-
 	@Override
 	public boolean validar() {	
 		ArrayList<String> atributosInvalidos = new ArrayList<String>();
@@ -70,6 +70,35 @@ public class Producto extends ItemCatalogo{
 			throw new IllegalStateException("El descuento no está definido para: " + nombre);
 		}
 		return this.getPrecioBase() * ( 1 - ( descuento.floatValue() / 100 ) );
+	}
+	
+	@Override
+	public float getPeso() {
+		
+		if ( peso == null ) {
+			throw new IllegalStateException("El peso no está definido para: " + nombre);
+		}
+		return peso.floatValue();
+	}
+	
+	public List<Entrada> getListEntrada(int cantidadLineaPedido) {
+		
+		List<Entrada> entrada =  new ArrayList<Entrada>();
+		entrada.add(new Entrada(this, cantidadLineaPedido, getPrecioFinal()));
+		return entrada;
+	}
+	
+	public String getNombre() {
+		if ( nombre == null ) {
+			throw new IllegalStateException("El nombre no está definido");
+		}
+		return nombre;
+	}
+	
+	//Visitor Pattern
+	@Override
+	public void aceptar(ReporteVisitor visitor) {
+		visitor.visitarProducto( this );
 	}
 }
 
