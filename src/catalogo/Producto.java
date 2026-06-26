@@ -64,6 +64,13 @@ public class Producto extends ItemCatalogo{
 		}
 		return precio.floatValue();
 	}
+	
+	public float getPrecioFinal() {
+		if ( descuento == null ) {
+			throw new IllegalStateException("El descuento no está definido para: " + nombre);
+		}
+		return this.getPrecioBase() * ( 1 - ( descuento.floatValue() / 100 ) );
+	}
 }
 
 
