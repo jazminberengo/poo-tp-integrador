@@ -12,7 +12,7 @@ public class NombreContiene implements CriterioBusqueda {
 	
 	@Override
 	public boolean cumple(ItemCatalogo item) {
-		return item.nombre.contains(texto);
+		return item.getNombre().contains(texto);
 	}
 
 }

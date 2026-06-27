@@ -1,15 +1,14 @@
 package catalogo;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import reportes.Entrada;
-import reportes.ReporteVisitor;
+import java.util.ArrayList;
+import reportes.ItemVisitor;
 
 public class Paquete extends ItemCatalogo{
 
 	public Float descuento;
-	public ArrayList<ItemCatalogo> items;
+	public List<ItemCatalogo> items;
 
 	public Paquete(	String nombre, String descripcion) {
 		super(nombre, descripcion);
@@ -20,11 +19,11 @@ public class Paquete extends ItemCatalogo{
 	
 	@Override
 	public boolean validar() {
-		if ( nombre == null ) {
+		if ( this.getNombre() == null ) {
 			System.out.println("nombre es un atributo invalido");
 			return false;
 			}
-		if ( descripcion == null ) {
+		if ( this.getDescripcion() == null ) {
 			System.out.println("descripcion es un atributo invalido");
 			return false; 
 			}
@@ -54,24 +53,20 @@ public class Paquete extends ItemCatalogo{
 						sum();
 	}
 	
-	public List<Entrada> getListEntrada(int cantidadLineaPedido) {
-		
-		List<Entrada> entradas =  new ArrayList<Entrada>();
-		
-		for (ItemCatalogo item : items) {
-	        List<Entrada> entradasDelItem = item.getListEntrada(cantidadLineaPedido);
-	        entradas.addAll(entradasDelItem);
-		}
-		return entradas;
+	public void agregar( ItemCatalogo ic ){ items.add( ic ); }
+
+	public void remover(ItemCatalogo ic){ 
+		String nombreABuscar = ic.getNombre();
+		items.removeIf(item -> item.getNombre().equals(nombreABuscar));
 	}
 	
 	//Visitor Pattern
 	@Override
-	public void aceptar(ReporteVisitor visitor) {
+	public void accept( ItemVisitor itemVisitor) {
+		itemVisitor.visit(this);
 		
-		visitor.visitarPaquete( this );
 	}
-	
+		
 }
 
 

@@ -1,11 +1,18 @@
 package reportes;
 
-import catalogo.Paquete;
-import catalogo.Producto;
+import java.util.List;
 
-public interface ReporteVisitor {
+public abstract class ReporteVisitor implements ItemVisitor{
 
-	public void visitarProducto(Producto producto);
-	
-	public void visitarPaquete(Paquete paquete);
+	 protected int cantidadActual;
+	 protected float precioCobradoActual;
+
+	 public void setVentaActual(int cantidad, float precio) {
+		 this.cantidadActual = cantidad;
+		 this.precioCobradoActual = precio;
+	 }
+
+	 public abstract List<Entrada> getFinishedList();
+	 
+	 public abstract String titulo();
 }
