@@ -22,7 +22,6 @@ public class NotificadorEmail implements Observador {
         } else if (nuevo instanceof EstadoEnviado) {
             asunto += " - En camino";
             mensaje += "Tu pedido está en camino.\n";
-            mensaje += "Fecha estimada: " + pedido.getFechaEntrega() + "\n";
         } else if (nuevo instanceof EstadoEntregado) {
             asunto += " - Entregado";
             mensaje += "Tu pedido fue entregado.\n";
