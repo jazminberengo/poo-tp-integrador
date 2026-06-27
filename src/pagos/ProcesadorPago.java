@@ -19,6 +19,8 @@ public abstract class ProcesadorPago {
 	
 	protected abstract void ejecutarTransaccion();
 	
-	protected abstract void notificarResultado();
+	protected void notificarResultado() {
+		System.out.println("Codigo de transaccion: " + codigoTransaccion);
+	}
 
 }
