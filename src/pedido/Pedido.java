@@ -135,6 +135,10 @@ public class Pedido {
                 })
                 .sum();
     }
+    
+    public List<LineaPedido> getLineaPedidos(){
+    	return items;
+    }
 
     // Observer: suscripción y notificación
 
