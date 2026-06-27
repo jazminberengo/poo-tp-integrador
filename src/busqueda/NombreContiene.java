@@ -12,7 +12,9 @@ public class NombreContiene implements CriterioBusqueda {
 	
 	@Override
 	public boolean cumple(ItemCatalogo item) {
-		return item.getNombre().contains(texto);
+		return item.getNombre()
+				.toLowerCase()
+				.contains(texto.toLowerCase());
 	}
 
 }
