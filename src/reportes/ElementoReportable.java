@@ -2,5 +2,5 @@ package reportes;
 
 public interface ElementoReportable {
 	
-	public void accept( ReporteVisitor visitor );
+	public void accept( ItemVisitor itemVisitor );
 }

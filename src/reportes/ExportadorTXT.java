@@ -3,7 +3,7 @@ package reportes;
 import java.time.LocalDate;
 import java.util.List;
 
-public class FormatoTXT implements FormatoExportador{
+public class ExportadorTXT implements FormatoExportador{
 
 	@Override
 	public String exportar(String titulo, LocalDate desde, LocalDate hasta, List<Entrada> entradas) {

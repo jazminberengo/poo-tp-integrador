@@ -1,12 +1,14 @@
 package catalogo;
 
+import java.util.List;
+
 import java.util.ArrayList;
-import reportes.ReporteVisitor;
+import reportes.ItemVisitor;
 
 public class Paquete extends ItemCatalogo{
 
 	public Float descuento;
-	public ArrayList<ItemCatalogo> items;
+	public List<ItemCatalogo> items;
 
 	public Paquete(	String nombre, String descripcion) {
 		super(nombre, descripcion);
@@ -17,11 +19,11 @@ public class Paquete extends ItemCatalogo{
 	
 	@Override
 	public boolean validar() {
-		if ( nombre == null ) {
+		if ( this.getNombre() == null ) {
 			System.out.println("nombre es un atributo invalido");
 			return false;
 			}
-		if ( descripcion == null ) {
+		if ( this.getDescripcion() == null ) {
 			System.out.println("descripcion es un atributo invalido");
 			return false; 
 			}
@@ -50,11 +52,18 @@ public class Paquete extends ItemCatalogo{
 						mapToDouble( i -> i.getPeso() ).
 						sum();
 	}
+	
+	public void agregar( ItemCatalogo ic ){ items.add( ic ); }
 
+	public void remover(ItemCatalogo ic){ 
+		String nombreABuscar = ic.getNombre();
+		items.removeIf(item -> item.getNombre().equals(nombreABuscar));
+	}
+	
 	//Visitor Pattern
 	@Override
-	public void accept( ReporteVisitor reporteVisitor ) {
-		reporteVisitor.visit(this);
+	public void accept( ItemVisitor itemVisitor) {
+		itemVisitor.visit(this);
 		
 	}
 		

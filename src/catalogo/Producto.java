@@ -1,44 +1,45 @@
 package catalogo;
 
 import java.util.ArrayList;
-
 import java.util.HashMap;
 import java.util.Map;
-import reportes.ReporteVisitor;
+
+import reportes.ItemVisitor;
 
 public class Producto extends ItemCatalogo{
 
 	public String sku;
 	public String marca;
 	public String categoria;
-	public Float  precio;
-	public Float  descuento;
-	public Float  peso;
-	public Map<String, Object> atributos;
+	private Float  precio;
+	public Float  descuentoPromo;
+	private Float  peso;
+	private Map<String, Object> atributos;
 	
 	public Producto(String nombre, String descripcion, 
-					String sku, Float precio, Float peso ) {
+					String sku, Float precio, Float peso,
+					String marca) {
         super(nombre, descripcion);
         this.sku = sku;
         this.precio = precio;
         this.peso = peso;
+        this.marca = marca;
         this.atributos = new HashMap<>(); 
     }
 	
-	public void setMarca( String marca ) {	this.marca = marca; }
 	public void setCategoria( String categoria ) { this.categoria = categoria; }
-	public void setDescuento( Float descuento ) { this.descuento = descuento; }
+	public void setDescuento( Float descuento ) { this.descuentoPromo = descuento; }
 	
 	@Override
 	public boolean validar() {	
 		ArrayList<String> atributosInvalidos = new ArrayList<String>();
 		
-		if ( nombre == null ) 		{	atributosInvalidos.add("nombre"); }
-		if ( descripcion == null ) 	{ 	atributosInvalidos.add("descripcion"); }
+		if ( this.getNombre() == null ) 		{	atributosInvalidos.add("nombre"); }
+		if ( this.getNombre() == null ) 	{ 	atributosInvalidos.add("descripcion"); }
 		if ( sku == null )			{	atributosInvalidos.add("sku"); }
 		if ( marca == null ) 		{	atributosInvalidos.add("marca"); }
 		if ( precio == null )		{ 	atributosInvalidos.add("precio"); }
-		if ( descuento == null )	{ 	atributosInvalidos.add("descuento"); }
+		if ( descuentoPromo == null )	{ 	atributosInvalidos.add("descuento"); }
 		
 		atributosInvalidos.addAll( atributos.entrySet().stream()
 				.filter(e -> e.getValue() == null)
@@ -58,32 +59,41 @@ public class Producto extends ItemCatalogo{
 	@Override
 	public float getPrecioBase() {
 		if ( precio == null ) {
-			throw new IllegalStateException("El precio no está definido para: " + nombre);
+			throw new IllegalStateException("El precio no está definido para: " + this.getNombre());
 		}
 		return precio.floatValue();
 	}
 	
 	public float getPrecioFinal() {
-		if ( descuento == null ) {
-			throw new IllegalStateException("El descuento no está definido para: " + nombre);
+		if ( descuentoPromo == null ) {
+			throw new IllegalStateException("El descuento no está definido para: " + this.getNombre());
 		}
-		return this.getPrecioBase() * ( 1 - ( descuento.floatValue() / 100 ) );
+		return this.getPrecioBase() * ( 1 - ( descuentoPromo.floatValue() / 100 ) );
 	}
 	
 	@Override
 	public float getPeso() {
 		
 		if ( peso == null ) {
-			throw new IllegalStateException("El peso no está definido para: " + nombre);
+			throw new IllegalStateException("El peso no está definido para: " + this.getNombre());
 		}
 		return peso.floatValue();
 	}
 
+	public void addAtributoDinamico( String key, Object atributo ) {
+		if (this.atributos.containsKey(key)) {
+	        System.out.println("ya existe un atributo dinámico con ese nombre");
+	    } else {
+	    	this.atributos.put(key, atributo);
+	    }
+	}
+	
 	//Visitor Pattern
 	@Override
-	public void accept( ReporteVisitor reporteVisitor ) {
-		reporteVisitor.visit(this);
+	public void accept( ItemVisitor itemVisitor ) {
+		itemVisitor.visit(this);
 	}	
+	
 }
 
 

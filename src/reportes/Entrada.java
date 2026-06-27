@@ -4,11 +4,11 @@ import catalogo.ItemCatalogo;
 
 public class Entrada {
 	
-	public ItemCatalogo itemCatalogo;
-	public int unidadesVendidas;
-	public Float precioPromedio;
+	private ItemCatalogo itemCatalogo;
+	private int unidadesVendidas;
+	private float precioPromedio;
 	
-	public Entrada (ItemCatalogo itemCatalogo, int unidadesVendidas, Float precioPromedio) {
+	public Entrada (ItemCatalogo itemCatalogo, int unidadesVendidas, float precioPromedio) {
 		this.itemCatalogo = itemCatalogo;
 		this.unidadesVendidas = unidadesVendidas;
 		this.precioPromedio = precioPromedio;
@@ -30,5 +30,5 @@ public class Entrada {
 	
 	public int getUnidadesVendidas() {	return unidadesVendidas;	}
 	public ItemCatalogo getItemCatalogo() {	return itemCatalogo;	}
-	public float getPrecioPromedio() {	return precioPromedio.floatValue();	}
+	public float getPrecioPromedio() {	return precioPromedio;	}
 }
