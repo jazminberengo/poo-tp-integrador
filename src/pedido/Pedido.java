@@ -175,6 +175,10 @@ public class Pedido {
 
     public MetodoEnvio getMetodoEnvio() { return metodoEnvio; }
     
+    public float getCostoEnvio() {
+        return (metodoEnvio != null) ? metodoEnvio.calcularCosto(this) : 0f;
+    }
+    
     public LocalDate getFechaEntrega() { return fechaEntrega; }
 
     public void setMetodoEnvio(MetodoEnvio metodoEnvio) {
