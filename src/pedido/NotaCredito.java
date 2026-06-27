@@ -3,11 +3,11 @@ package pedido;
 import java.time.LocalDate;
 
 /*
-   Representa un reembolso emitido cuando un pedido se cancela.
-  
-   El monto varía según desde qué estado se cancela:
-   - Desde CONFIRMADO: reembolso total (productos + envío)
-   - Desde ENVIADO:    reembolso parcial (solo productos)
+ * Representa un reembolso emitido cuando un pedido se cancela.
+ * El monto se pasa como parámetro porque es responsabilidad 
+ * del estado desde el cual se cancele. 
+ * - Desde CONFIRMADO: Se reembolsan productos + envío.
+ * - Desde ENVIADO:    Se reembolsan solo los productos.
  */
 public class NotaCredito {
 

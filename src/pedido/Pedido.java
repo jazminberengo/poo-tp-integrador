@@ -13,16 +13,12 @@ import java.util.Collections;
 import java.util.List;
 
 /*
-   Pedido es la clase que coordina el ciclo de vida del pedido.
-  
-   Aplica dos patrones:
-     
-   STATE: Pedido delega todas las operaciones (confirmar, cancelar, etc.)
-   en el objeto 'estado' actual.
-  
-   OBSERVER: Pedido mantiene una lista de observadores y los notifica
-   cada vez que cambia de estado, sin conocer qué hace cada uno.
-*/
+ * Representa el ciclo de vida de un pedido.
+ * Aplica patrón STATE, delegando todas las operaciones
+ * en el objeto 'estado' actual
+ * También aplica OBSERVER porque tiene una lista de 
+ * observadores y los notifica cada vez que cambia de estado.
+ */
 
 public class Pedido {
 
@@ -45,12 +41,12 @@ public class Pedido {
     public Pedido(String id, Cliente cliente) {
         this.id = id;
         this.cliente = cliente;
-        this.estado = new EstadoBorrador(); // todo pedido arranca en borrador
+        this.estado = new EstadoBorrador(); // los pedidos arrancan en borrador
         this.fechaCreacion = LocalDate.now();
     }
 
-    // Cada método delega en el estado actual.
-    // Si la operación no es válida en ese estado, el estado lanza la excepción.
+    // Los métodos delegan en el estado actual
+    // Si la operación no es válida, se lanza una excepción
 
     public void agregarItem(ItemCatalogo item, int cantidad) {
         estado.agregarItem(this);           // valida que sea posible
@@ -85,22 +81,21 @@ public class Pedido {
     // Los estados concretos llaman a los siguientes métodos para ejecutar la lógica
     // de dominio (stock, reembolso) antes de cambiar de estado.
 
-    public void cambiarEstado(EstadoPedido nuevoEstado) { // único método donde el estado cambia
+    public void cambiarEstado(EstadoPedido nuevoEstado) {
         EstadoPedido anterior = this.estado;
         this.estado = nuevoEstado;
         notificar(anterior);
     }
 
-    // Decrementa el stock de todos los ítems del pedido.
+    // Decrementa el stock de todos los ítems.
     public void decrementarStock() {
-        // El stock real vive en el catálogo/depósito.
-        // Acá se delega al ítem para que maneje su propio stock.
+        // El ítem maneja su propio stock.
         for (LineaPedido linea : items) {
             linea.getItem().decrementarStock(linea.getCantidad());
         }
     }
 
-    // Repone el stock de todos los ítems (usado al cancelar desde CONFIRMADO).
+    // Repone el stock de todos los ítems.
     public void reponerStock() {
         for (LineaPedido linea : items) {
             linea.getItem().incrementarStock(linea.getCantidad());
@@ -121,7 +116,7 @@ public class Pedido {
                 .sum();
     }
 
-    // Total completo: productos + envío.
+    // Suma de todos los ítems con costo de envío.
     public float getTotal() {
         return getSubtotalProductos() + getCostoEnvio();
     }
@@ -140,7 +135,7 @@ public class Pedido {
     	return items;
     }
 
-    // Observer: suscripción y notificación
+    // Observer 
 
     public void suscribir(Observador observador) {
         observadores.add(observador);
@@ -150,11 +145,7 @@ public class Pedido {
         observadores.remove(observador);
     }
 
-    /*
-       Notifica a todos los observadores del cambio de estado.
-       Pedido no sabe qué hace cada observador, solo les avisa.
-     */
-    public void notificar(EstadoPedido estadoAnterior) {
+    public void notificar(EstadoPedido estadoAnterior) { // Notifica a todos los observadores del cambio de estado.
         for (Observador o : observadores) {
             o.actualizar(this, estadoAnterior, this.estado);
         }

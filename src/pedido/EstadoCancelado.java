@@ -1,10 +1,9 @@
 package pedido;
 
 /*
-   CANCELADO: estado terminal. El pedido fue cancelado.
-   No se permite ninguna operación — todos los métodos lanzan excepción
-   gracias a los defaults de EstadoPedido.
+ * CANCELADO: estado terminal. 
+ * No se permite ninguna operación.
  */
 public class EstadoCancelado implements EstadoPedido {
-    // Sin overrides: cualquier operación lanza OperacionInvalidaException
+    // cualquier operación lanza OperacionInvalidaException
 }

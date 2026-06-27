@@ -3,11 +3,9 @@ package pedido;
 import catalogo.ItemCatalogo;
 
 /*
-   Representa una línea dentro de un pedido: un ítem con su cantidad
-   y el precio unitario al momento de la compra.
-  
-   Se guarda el precio acá porque si el precio del producto cambia
-   después, el pedido no se ve afectado.
+ * Representa un ítem con su cantidad y precio unitaro al momento de la compra.
+ * 
+ * Si el precio del producto cambia después, el pedido no se ve afectado.
  */
 public class LineaPedido {
 
@@ -18,7 +16,7 @@ public class LineaPedido {
     public LineaPedido(ItemCatalogo item, int cantidad) {
         this.item = item;
         this.cantidad = cantidad;
-        this.precioUnitario = item.getPrecioBase(); // snapshot
+        this.precioUnitario = item.getPrecioBase();
     }
 
     public ItemCatalogo getItem() {

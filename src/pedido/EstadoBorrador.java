@@ -1,8 +1,8 @@
 package pedido;
 
 /*
-   BORRADOR: el cliente está armando el pedido.
-   Únicas operaciones válidas: agregar/quitar ítems, confirmar, cancelar.
+ * BORRADOR: el cliente está armando el pedido.
+ * Operaciones válidas: agregar/quitar ítems, confirmar, cancelar.
  */
 public class EstadoBorrador implements EstadoPedido {
 
@@ -26,7 +26,7 @@ public class EstadoBorrador implements EstadoPedido {
 
     @Override
     public void cancelar(Pedido pedido) {
-        // Desde borrador no hay stock que reponer ni reembolso
+        // No hay stock que reponer ni reembolso
     	pedido.registrarFechaCancelacion();
         pedido.cambiarEstado(new EstadoCancelado());
     }

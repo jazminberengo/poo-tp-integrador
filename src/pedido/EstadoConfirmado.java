@@ -1,8 +1,8 @@
 package pedido;
 
 /*
-   CONFIRMADO: el cliente confirmó. El stock ya fue decrementado.
-   Si se cancela desde acá: se repone el stock y se reembolsa todo (productos + envío).
+ * CONFIRMADO: el cliente confirmó, stock decrementado.
+ * Si fuese cancelado luego, se repone el stock y se reembolsa todo (productos + envío).
  */
 public class EstadoConfirmado implements EstadoPedido {
 
@@ -13,7 +13,7 @@ public class EstadoConfirmado implements EstadoPedido {
 
     @Override
     public void cancelar(Pedido pedido) {
-        // Viene de CONFIRMADO: hay que reponer stock y reembolsar todo
+        // hay que reponer stock y reembolsar todo
         pedido.reponerStock();
         pedido.generarNotaCredito(pedido.getTotal()); // reembolso total
         pedido.registrarFechaCancelacion();

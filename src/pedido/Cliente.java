@@ -3,8 +3,8 @@ package pedido;
 import envio.Direccion;
 
 /*
-   Representa al cliente que realiza un pedido.
-   Su dirección es usada por EnvioEstandar para calcular el costo.
+ * Representa al cliente que realiza un pedido.
+ * Su dirección es usada por para calcular el costo.
  */
 public class Cliente {
 

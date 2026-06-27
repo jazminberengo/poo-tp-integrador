@@ -2,11 +2,10 @@ package pedido;
 
 
 /*
-   Patrón STATE — interfaz que define todas las operaciones posibles sobre un pedido.
-  
-   Cada estado concreto implementa solo las operaciones que tiene sentido hacer
-   en ese momento. Las operaciones inválidas lanzan OperacionInvalidaException.
-  
+ * Implementa patrón STATE. EstadoPedido es la interfaz que define todas las operaciones posibles sobre un pedido.
+ *
+ * Los estados concretos implementan solo operaciones válidas (según dominio) dada su estado.
+ * Las operaciones inválidas lanzan OperacionInvalidaException. 
  */
 public interface EstadoPedido {
 
