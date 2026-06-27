@@ -7,7 +7,7 @@ public class GeneradorFactura implements Observador {
 
     @Override
     public void actualizar(Pedido pedido, EstadoPedido anterior, EstadoPedido nuevo) {
-        if (nuevo instanceof EstadoConfirmado) {
+        if (nuevo instanceof EstadoEntregado) {
             emitirFactura(pedido);
         }
     }
