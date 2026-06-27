@@ -1,29 +1,32 @@
 package pagos;
 
 public class PagoTransferencia extends ProcesadorPago{
+	
+	private APITransferencia api;
+	
+	public PagoTransferencia(APITransferencia api) {
+		this.api = api;
+	}
 
 	@Override
 	protected void validarDatos() {
-		// TODO Validar datos de la transferencia (CBU, alias)
-		
+		api.validarCuenta();
 	}
 
 	@Override
 	protected void reservarFondos() {
 		// No aplica para transferencias bancarias
-		
 	}
 
 	@Override
 	protected void ejecutarTransaccion() {
-		// TODO Ejecutar la transferencia mediante la API
-		
+		codigoTransaccion = api.ejecutarTransferencia();
 	}
 
 	@Override
 	protected void notificarResultado() {
-		// TODO Generar comprobante de transferencia
-		
+		super.notificarResultado();
+		api.generarComprobante(codigoTransaccion);
 	}
 
 }

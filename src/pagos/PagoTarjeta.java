@@ -1,29 +1,32 @@
 package pagos;
 
 public class PagoTarjeta extends ProcesadorPago{
+	
+	private APITarjeta api;
+	
+	public PagoTarjeta(APITarjeta api) {
+		this.api = api;
+	}
 
 	@Override
 	protected void validarDatos() {
-		// TODO Validar los datos de la tarjeta (nro, vencimiento, CVV)
-		
+		api.validarTarjeta();
 	}
 
 	@Override
 	protected void reservarFondos() {
-		// TODO Reservar el monto en la tarjeta antes de confirmar el pago
-		
+		api.preAutorizarFondos();
 	}
 
 	@Override
 	protected void ejecutarTransaccion() {
-		// TODO Ejecutar el pago utilizando la API de la tarjeta
-		
+		codigoTransaccion = api.ejecutarPago();
 	}
 
 	@Override
 	protected void notificarResultado() {
-		// TODO Generar y enviar el cupon de pago
-		
+		super.notificarResultado();
+		api.generarCupon(codigoTransaccion);
 	}
 
 }

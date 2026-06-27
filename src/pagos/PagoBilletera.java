@@ -1,29 +1,32 @@
 package pagos;
 
 public class PagoBilletera extends ProcesadorPago{
+	
+	private APIBilletera api;
+	
+	public PagoBilletera(APIBilletera api) {
+		this.api = api;
+	}
 
 	@Override
 	protected void validarDatos() {
-		// TODO Validar datos de la billetera virtual
-		
+		api.validarSaldo();		
 	}
 
 	@Override
 	protected void reservarFondos() {
-		// TODO Reservar saldo de la billetera
-		
+		api.bloquearSaldo();
 	}
 
 	@Override
 	protected void ejecutarTransaccion() {
-		// TODO Ejecutar el pago mediante la API
-		
+		codigoTransaccion = api.ejecutarPago();
 	}
 
 	@Override
 	protected void notificarResultado() {
-		// TODO Notificar el resultado del pago
-		
+		super.notificarResultado();
+		api.enviarNotificacion(codigoTransaccion);
 	}
 
 }
