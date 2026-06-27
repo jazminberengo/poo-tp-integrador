@@ -1,9 +1,8 @@
 package pedido;
 
 /*
-   Excepción lanzada cuando se intenta una operación
-   que no está permitida en el estado actual del pedido.
-   Creada para evitar excepciones genéricas
+ * Se lanza esta excepción cuando se intentan ejecutar 
+ * operaciones inválidas dado el estado actual. 
  */
 public class OperacionInvalidaException extends RuntimeException {
 	

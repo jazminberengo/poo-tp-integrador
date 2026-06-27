@@ -1,8 +1,8 @@
 package pedido;
 
 /*
-   EN_PREPARACION: el depósito está preparando el envío.
-   Solo puede avanzar a ENVIADO. No puede cancelarse.
+ * EN PREPARACION: el depósito está preparando el envío.
+ * Solo puede avanzar a ENVIADO. No puede cancelarse.
  */
 public class EstadoEnPreparacion implements EstadoPedido {
 
