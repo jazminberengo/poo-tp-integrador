@@ -1,15 +1,15 @@
 package reportes;
 
-import catalogo.Producto;
+import catalogo.ItemCatalogo;
 
 public class Entrada {
 	
-	public Producto producto;
+	public ItemCatalogo itemCatalogo;
 	public int unidadesVendidas;
 	public Float precioPromedio;
 	
-	public Entrada (Producto producto, int unidadesVendidas, Float precioPromedio) {
-		this.producto = producto;
+	public Entrada (ItemCatalogo itemCatalogo, int unidadesVendidas, Float precioPromedio) {
+		this.itemCatalogo = itemCatalogo;
 		this.unidadesVendidas = unidadesVendidas;
 		this.precioPromedio = precioPromedio;
 	}
@@ -28,4 +28,7 @@ public class Entrada {
 	    return this; // "this" para que funcione con  merge 
 	}
 	
+	public int getUnidadesVendidas() {	return unidadesVendidas;	}
+	public ItemCatalogo getItemCatalogo() {	return itemCatalogo;	}
+	public float getPrecioPromedio() {	return precioPromedio.floatValue();	}
 }

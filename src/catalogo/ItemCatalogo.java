@@ -1,9 +1,7 @@
 package catalogo;
 
-import java.util.List;
-
 import reportes.ElementoReportable;
-import reportes.Entrada;
+
 
 public abstract class ItemCatalogo implements ElementoReportable{
 
@@ -21,5 +19,5 @@ public abstract class ItemCatalogo implements ElementoReportable{
 
 	public abstract float getPeso();
 	
-	public abstract List<Entrada> getListEntrada(int cantidadLineaPedido);
+	public String getNombre() {	return nombre;	}
 }

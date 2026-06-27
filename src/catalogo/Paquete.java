@@ -1,9 +1,6 @@
 package catalogo;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import reportes.Entrada;
 import reportes.ReporteVisitor;
 
 public class Paquete extends ItemCatalogo{
@@ -53,25 +50,14 @@ public class Paquete extends ItemCatalogo{
 						mapToDouble( i -> i.getPeso() ).
 						sum();
 	}
-	
-	public List<Entrada> getListEntrada(int cantidadLineaPedido) {
-		
-		List<Entrada> entradas =  new ArrayList<Entrada>();
-		
-		for (ItemCatalogo item : items) {
-	        List<Entrada> entradasDelItem = item.getListEntrada(cantidadLineaPedido);
-	        entradas.addAll(entradasDelItem);
-		}
-		return entradas;
-	}
-	
+
 	//Visitor Pattern
 	@Override
-	public void aceptar(ReporteVisitor visitor) {
+	public void accept( ReporteVisitor reporteVisitor ) {
+		reporteVisitor.visit(this);
 		
-		visitor.visitarPaquete( this );
 	}
-	
+		
 }
 
 

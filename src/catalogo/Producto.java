@@ -1,11 +1,9 @@
 package catalogo;
 
 import java.util.ArrayList;
-import java.util.List;
+
 import java.util.HashMap;
 import java.util.Map;
-
-import reportes.Entrada;
 import reportes.ReporteVisitor;
 
 public class Producto extends ItemCatalogo{
@@ -80,26 +78,12 @@ public class Producto extends ItemCatalogo{
 		}
 		return peso.floatValue();
 	}
-	
-	public List<Entrada> getListEntrada(int cantidadLineaPedido) {
-		
-		List<Entrada> entrada =  new ArrayList<Entrada>();
-		entrada.add(new Entrada(this, cantidadLineaPedido, getPrecioFinal()));
-		return entrada;
-	}
-	
-	public String getNombre() {
-		if ( nombre == null ) {
-			throw new IllegalStateException("El nombre no está definido");
-		}
-		return nombre;
-	}
-	
+
 	//Visitor Pattern
 	@Override
-	public void aceptar(ReporteVisitor visitor) {
-		visitor.visitarProducto( this );
-	}
+	public void accept( ReporteVisitor reporteVisitor ) {
+		reporteVisitor.visit(this);
+	}	
 }
 
 
