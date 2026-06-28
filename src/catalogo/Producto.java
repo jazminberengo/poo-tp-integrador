@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import envios.Sucursal;
 import reportes.ItemVisitor;
 
 public class Producto extends ItemCatalogo{
@@ -16,10 +17,10 @@ public class Producto extends ItemCatalogo{
 	private Float  peso;
 	private Map<String, Object> atributos;
 	
-	public Producto(String nombre, String descripcion, 
+	public Producto(String nombre, String descripcion, Sucursal sucursal,
 					String sku, Float precio, Float peso,
 					String marca) {
-        super(nombre, descripcion);
+        super(nombre, descripcion, sucursal);
         this.sku = sku;
         this.precio = precio;
         this.peso = peso;
