@@ -19,7 +19,8 @@ class AndTest {
 				"Teclado RGB",
 				"SKU001",
 				25000f,
-				1.2f
+				1.2f,
+				"Logitech"
 		);
 	}
 
