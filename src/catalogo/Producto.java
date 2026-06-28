@@ -88,11 +88,18 @@ public class Producto extends ItemCatalogo{
 	    }
 	}
 	
+	@Override
+	public boolean tieneCategoria(String categoria) {
+		return this.categoria == categoria;
+	}
+
 	//Visitor Pattern
 	@Override
 	public void accept( ItemVisitor itemVisitor ) {
 		itemVisitor.visit(this);
-	}	
+	}
+
+	
 	
 }
 

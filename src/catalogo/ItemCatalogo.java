@@ -19,6 +19,8 @@ public abstract class ItemCatalogo implements ElementoReportable {
 
 	public abstract float getPeso();
 	
+	public abstract boolean tieneCategoria( String categoria );
+	
 	public String getNombre() {	return nombre;	}
 	public String getDescripcion() {	return descripcion;	}
 

@@ -7,8 +7,8 @@ import org.junit.jupiter.api.Test;
 
 import catalogo.Producto;
 
-class NombreContieneTest {
-
+class NotTest {
+	
 	private Producto producto;
 	
 	@BeforeEach
@@ -22,22 +22,21 @@ class NombreContieneTest {
 				"Logitech"
 		);
 	}
-	
-	@Test
-	void deberiaEncontrarTextoExistenteEnElNombre() {
-		NombreContiene criterio = new NombreContiene("Teclado");
-		assertTrue(criterio.cumple(producto));
-	}
 
 	@Test
-	void noDeberiaEncontrarTextoInexistente() {
-		NombreContiene criterio = new NombreContiene("Mouse");
+	void noDeberiaCumplirCuandoElCriterioEsVerdadero() {
+		Not criterio = new Not(
+				new NombreContiene("Teclado")
+		);
 		assertFalse(criterio.cumple(producto));
 	}
 	
 	@Test
-	void deberiaIgnorarMayusculasYMinusculas() {
-		NombreContiene criterio = new NombreContiene("teclado");
+	void deberiaCumplirCuandoElCriterioEsFalso() {
+		Not criterio = new Not(
+				new NombreContiene("Mouse")
+		);
 		assertTrue(criterio.cumple(producto));
 	}
+
 }

@@ -4,11 +4,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import catalogo.Producto;
 import java.util.List;
 
-class AndTest {
+import catalogo.Producto;
+
+class OrTest {
 
 	private Producto producto;
 	
@@ -26,29 +26,37 @@ class AndTest {
 
 	@Test
 	void deberiaCumplirCuandoTodosLosCriteriosSonVerdaderos() {
-		And criterio = new And(List.of(
+		Or criterio = new Or(List.of(
 				new NombreContiene("Teclado"),
+				new PrecioMaximo(30000f)
+		));
+		assertTrue(criterio.cumple(producto));
+	}
+
+	@Test
+	void deberiaCumplirCuandoElPrimeroEsVerdadero() {
+		Or criterio = new Or(List.of(
+				new NombreContiene("Teclado"),
+				new PrecioMaximo(10000f)
+		));
+		assertTrue(criterio.cumple(producto));
+	}
+	
+	@Test
+	void deberiaCumplirCuandoElSegundoEsVerdadero() {
+		Or criterio = new Or(List.of(
+				new NombreContiene("Mouse"),
 				new PrecioMaximo(30000f)
 		));
 		assertTrue(criterio.cumple(producto));
 	}
 	
 	@Test
-	void noDeberiaCumplirCuandoFallaElPrimerCriterio() {
-		And criterio = new And(List.of(
+	void noDeberiaCumplirCuandoNingunCriterioEsVerdadero() {
+		Or criterio = new Or(List.of(
 				new NombreContiene("Mouse"),
-				new PrecioMaximo(30000f)
+				new PrecioMaximo(10000f)
 		));
 		assertFalse(criterio.cumple(producto));
 	}
-	
-	@Test
-	void noDeberiaCumplirCuandoFallaElSegundoCriterio() {
-		And criterio = new And(List.of(
-				new NombreContiene("Teclado"),
-				new PrecioMaximo(20000f)
-		));
-		assertFalse(criterio.cumple(producto));
-	}
-
 }
