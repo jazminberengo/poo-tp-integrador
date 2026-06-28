@@ -34,6 +34,10 @@ public abstract class ItemCatalogo implements ElementoReportable {
 	public void incrementarStock(int cantidad ) {
 		sucursal.incrementarStock(this, cantidad);
 	}
+	
+	public boolean tieneStockDisponible() {
+		return sucursal.tieneStock(this);
+	}
 }
 
 

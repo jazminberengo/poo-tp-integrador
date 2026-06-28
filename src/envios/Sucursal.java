@@ -45,6 +45,15 @@ public class Sucursal {
 		registro.setCantidad( cantAntesDeIncremento + cantidad);
 	}
 	
+	public boolean tieneStock(ItemCatalogo item) {
+		Registro registro = stock.get(item.getNombre());
+		
+		return registro != null && registro.getCantidad() > 0;
+	}
+	
+	public void agregarRegistro(Registro registro) {
+		stock.put(registro.getItem().getNombre(), registro);
+	}
 }
 
 
