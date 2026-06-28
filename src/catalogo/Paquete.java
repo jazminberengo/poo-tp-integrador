@@ -60,6 +60,18 @@ public class Paquete extends ItemCatalogo{
 		items.removeIf(item -> item.getNombre().equals(nombreABuscar));
 	}
 	
+	@Override
+	public boolean tieneCategoria(String categoria) {
+		
+		int listaSize = items.size();
+		for ( int i = 0; i < listaSize; i++) {
+			if( items.get(i).tieneCategoria(categoria) ) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	//Visitor Pattern
 	@Override
 	public void accept( ItemVisitor itemVisitor) {
