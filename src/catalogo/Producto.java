@@ -36,7 +36,7 @@ public class Producto extends ItemCatalogo{
 		ArrayList<String> atributosInvalidos = new ArrayList<String>();
 		
 		if ( this.getNombre() == null ) 		{	atributosInvalidos.add("nombre"); }
-		if ( this.getNombre() == null ) 	{ 	atributosInvalidos.add("descripcion"); }
+		if ( this.getDescripcion() == null ) 	{ 	atributosInvalidos.add("descripcion"); }
 		if ( sku == null )			{	atributosInvalidos.add("sku"); }
 		if ( marca == null ) 		{	atributosInvalidos.add("marca"); }
 		if ( precio == null )		{ 	atributosInvalidos.add("precio"); }
@@ -91,7 +91,7 @@ public class Producto extends ItemCatalogo{
 	
 	@Override
 	public boolean tieneCategoria(String categoria) {
-		return this.categoria == categoria;
+		return categoria != null && categoria.equals(this.categoria);
 	}
 
 	//Visitor Pattern
