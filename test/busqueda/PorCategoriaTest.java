@@ -8,42 +8,40 @@ import org.junit.jupiter.api.Test;
 import catalogo.Producto;
 import envios.Sucursal;
 
-class PrecioMaximoTest {
-	
+class PorCategoriaTest {
+
 	private Producto producto;
 	private Sucursal sucursal;
-
+	
 	@BeforeEach
 	void setUp() {
 		sucursal = new Sucursal();
 		
 		producto = new Producto(
-				"Teclado Mecanico",
-				"Teclado RGB",
+				"Teclado",
+				"Teclado mecanico",
 				sucursal,
 				"SKU001",
-				25000f,
-				1.2f,
+				1000f,
+				1f,
 				"Logitech"
 		);
+		
+		producto.setCategoria("Electronica");
 	}
 
 	@Test
-	void deberiaCumplirCuandoElPrecioEsMenorAlMaximo() {
-		PrecioMaximo criterio = new PrecioMaximo(30000f);
-		assertTrue(criterio.cumple(producto));
-	}
-
-	@Test
-	void deberiaCumplirCuandoElPrecioEsIgualAlMaximo() {
-		PrecioMaximo criterio = new PrecioMaximo(25000f);
+	void deberiaCumplirCuandoElProductoPerteneceALaCategoria() {
+		PorCategoria criterio = new PorCategoria("Electronica");
+		
 		assertTrue(criterio.cumple(producto));
 	}
 	
 	@Test
-	void noDeberiaCumplirCuandoElPrecioSuperaElMaximo() {
-		PrecioMaximo criterio = new PrecioMaximo(20000f);
+	void noDeberiaCumplirCuandoElProductoNoPerteneceALaCategoria() {
+		PorCategoria criterio = new PorCategoria("Hogar");
+		
 		assertFalse(criterio.cumple(producto));
 	}
-	
+
 }

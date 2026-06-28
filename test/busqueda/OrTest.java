@@ -7,16 +7,21 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import catalogo.Producto;
+import envios.Sucursal;
 
 class OrTest {
 
 	private Producto producto;
+	private Sucursal sucursal;
 	
 	@BeforeEach
 	void setUp() {
+		sucursal = new Sucursal();
+		
 		producto = new Producto(
 				"Teclado Mecanico",
 				"Teclado RGB",
+				sucursal,
 				"SKU001",
 				25000f,
 				1.2f,
