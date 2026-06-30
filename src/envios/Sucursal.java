@@ -55,22 +55,3 @@ public class Sucursal {
 		stock.put(registro.getItem().getNombre(), registro);
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
->>>>>>> b789dadd412c96b00d6f218b0a563696bc01649c
