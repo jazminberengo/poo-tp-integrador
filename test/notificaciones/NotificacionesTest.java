@@ -68,14 +68,14 @@ class NotificacionesTest {
     @BeforeEach
     void setUp() {
         Direccion direccion = new Direccion(
-                "Rivadavia",
+                "Monteviedo",
                 "100",
-                "CABA",
+                "Bernal",
                 "Buenos Aires",
-                "1002",
+                "1876",
                 5f);
 
-        Cliente cliente = new Cliente("Ana", "ana@mail.com", direccion);
+        Cliente cliente = new Cliente("Marcos", "marcos@mail.com", direccion);
 
         pedido = new Pedido("ORD-99", cliente);
         mail = new MailSenderStub();
@@ -99,7 +99,7 @@ class NotificacionesTest {
         pedido.confirmar();
 
         assertEquals(1, mail.cantidadMails);
-        assertEquals("ana@mail.com", mail.destinatario);
+        assertEquals("marcos@mail.com", mail.destinatario);
         assertTrue(mail.asunto.contains("Confirmado"));
     }
 
@@ -151,7 +151,7 @@ class NotificacionesTest {
 
         pedido.confirmar();
 
-        assertTrue(mail.mensaje.contains("Ana"));
+        assertTrue(mail.mensaje.contains("Marcos"));
     }
 
     @Test
