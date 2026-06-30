@@ -1,5 +1,12 @@
 package busqueda;
 
-public class Disponible {
+import catalogo.ItemCatalogo;
+
+public class Disponible implements CriterioBusqueda{
+
+	@Override
+	public boolean cumple(ItemCatalogo item) {
+		return item.tieneStockDisponible();
+	}
 
 }

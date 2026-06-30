@@ -2,6 +2,8 @@ package catalogo;
 
 import java.util.List;
 
+import envios.Sucursal;
+
 import java.util.ArrayList;
 import reportes.ItemVisitor;
 
@@ -10,8 +12,8 @@ public class Paquete extends ItemCatalogo{
 	public Float descuento;
 	public List<ItemCatalogo> items;
 
-	public Paquete(	String nombre, String descripcion) {
-		super(nombre, descripcion);
+	public Paquete(	String nombre, String descripcion, Sucursal sucursal) {
+		super(nombre, descripcion, sucursal);
 		items = new ArrayList<ItemCatalogo>();
 	}
 	

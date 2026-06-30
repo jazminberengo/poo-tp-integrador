@@ -6,16 +6,19 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import catalogo.Producto;
+import envios.Sucursal;
 
 class NotTest {
 	
 	private Producto producto;
+	private Sucursal sucursal;
 	
 	@BeforeEach
 	void setUp() {
 		producto = new Producto(
 				"Teclado Mecanico",
 				"Teclado RGB",
+				sucursal,
 				"SKU001",
 				25000f,
 				1.2f,

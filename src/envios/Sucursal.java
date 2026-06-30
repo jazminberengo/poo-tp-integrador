@@ -1,24 +1,76 @@
 package envios;
 
-import catalogo.ItemCatalogo;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-/*
- * Representa una sucursal física donde el cliente puede retirar su pedido.
- */
+import catalogo.ItemCatalogo;
+import pedido.LineaPedido;
+import pedido.Pedido;
+
 public class Sucursal {
 
-    private final String nombre;
-    private final Direccion direccion;
+	private Map<String, Registro> stock = new HashMap<String, Registro>();
+	
+	public boolean tieneStockPara( Pedido pedido ) {
+		
+		List<LineaPedido> lineaPedidos = pedido.getLineaPedidos();
+		
+		int lineaPedidosSize = lineaPedidos.size();
+		
+		for( int i = 0; i < lineaPedidosSize; i++ ) {
+			LineaPedido lineaPedidoActual = lineaPedidos.get(i);
+			String nombreItem = lineaPedidoActual.getItem().getNombre();
 
-    public Sucursal(String nombre, Direccion direccion) {
-        this.nombre = nombre;
-        this.direccion = direccion;
-    }
-
-    public boolean tieneStock(ItemCatalogo item) {
-    	// IMPLEMENTAR: Busqueda mediante Disponible de package busqueda 
-    }
-
-    public String getNombre()      { return nombre; }
-    public Direccion getDireccion(){ return direccion; }
+			if ( !(stock.get( nombreItem ).cumplePara( lineaPedidoActual )) ) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public void decrementarStock( ItemCatalogo item, int cantidad ) {
+		String clave = item.getNombre();
+		Registro registro = this.stock.get(clave);
+		
+		int cantAntesDeDecremento = registro.getCantidad();
+		registro.setCantidad( cantAntesDeDecremento - cantidad);
+	}
+	
+	public void incrementarStock( ItemCatalogo item, int cantidad ) {
+		String clave = item.getNombre();
+		Registro registro = this.stock.get(clave);
+		
+		int cantAntesDeIncremento = registro.getCantidad();
+		registro.setCantidad( cantAntesDeIncremento + cantidad);
+	}
+	
+	public boolean tieneStock(ItemCatalogo item) {
+		Registro registro = stock.get(item.getNombre());
+		
+		return registro != null && registro.getCantidad() > 0;
+	}
+	
+	public void agregarRegistro(Registro registro) {
+		stock.put(registro.getItem().getNombre(), registro);
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> b789dadd412c96b00d6f218b0a563696bc01649c

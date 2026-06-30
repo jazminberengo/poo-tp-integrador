@@ -1,12 +1,15 @@
 package pedido;
 
 import java.util.ArrayList;
+
 import catalogo.ItemCatalogo;
-import envio.MetodoEnvio;
+import envios.Direccion;
+import envios.MetodoEnvio;
 import notificaciones.Observador;
 import pagos.ProcesadorPago;
 import pedido.EstadoBorrador;
 import pedido.EstadoPedido;
+import envios.Direccion;
 
 import java.time.LocalDate;
 import java.util.Collections;
@@ -37,6 +40,8 @@ public class Pedido {
     private LocalDate fechaConfirmacion;
     private LocalDate fechaEntrega;
     private LocalDate fechaCancelacion;
+    
+    private Direccion direccion;
 
     public Pedido(String id, Cliente cliente) {
         this.id = id;
@@ -130,6 +135,8 @@ public class Pedido {
                 })
                 .sum();
     }
+    
+    public Direccion getDireccion() { return direccion; }
     
     public List<LineaPedido> getLineaPedidos(){
     	return items;

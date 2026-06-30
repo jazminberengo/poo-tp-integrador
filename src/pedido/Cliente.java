@@ -1,6 +1,6 @@
 package pedido;
 
-import envio.Direccion;
+import envios.Direccion;
 
 /*
  * Representa al cliente que realiza un pedido.

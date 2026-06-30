@@ -1,6 +1,7 @@
 package busqueda;
 
 import static org.junit.jupiter.api.Assertions.*;
+import envios.Sucursal;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,12 +12,16 @@ import java.util.List;
 class AndTest {
 
 	private Producto producto;
+	private Sucursal sucursal;
 	
 	@BeforeEach
 	void setUp() {
+		sucursal = new Sucursal();
+		
 		producto = new Producto(
 				"Teclado Mecanico",
 				"Teclado RGB",
+				sucursal,
 				"SKU001",
 				25000f,
 				1.2f,
