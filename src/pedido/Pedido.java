@@ -7,10 +7,6 @@ import envios.Direccion;
 import envios.MetodoEnvio;
 import notificaciones.Observador;
 import pagos.ProcesadorPago;
-import pedido.EstadoBorrador;
-import pedido.EstadoPedido;
-import envios.Direccion;
-
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
@@ -160,9 +156,9 @@ public class Pedido {
     
     // Setters de fechas (llamados por los estados)
     
-    public void registrarFechaConfirmacion() { this.fechaConfirmacion = LocalDate.now(); }
+    public void registrarFechaConfirmacion() { this.setFechaConfirmacion(LocalDate.now()); }
     public void registrarFechaEntrega()      { this.fechaEntrega = LocalDate.now(); }
-    public void registrarFechaCancelacion()  { this.fechaCancelacion = LocalDate.now(); }
+    public void registrarFechaCancelacion()  { this.setFechaCancelacion(LocalDate.now()); }
     
     // Getters
 
@@ -197,4 +193,24 @@ public class Pedido {
     public void setProcesadorPago(ProcesadorPago procesadorPago) {
         this.procesadorPago = procesadorPago;
     }
+
+	public LocalDate getFechaCreacion() {
+		return fechaCreacion;
+	}
+
+	public LocalDate getFechaConfirmacion() {
+		return fechaConfirmacion;
+	}
+
+	public void setFechaConfirmacion(LocalDate fechaConfirmacion) {
+		this.fechaConfirmacion = fechaConfirmacion;
+	}
+
+	public LocalDate getFechaCancelacion() {
+		return fechaCancelacion;
+	}
+
+	public void setFechaCancelacion(LocalDate fechaCancelacion) {
+		this.fechaCancelacion = fechaCancelacion;
+	}
 }
