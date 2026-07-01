@@ -2,6 +2,7 @@ package reportes;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Locale;
 
 public class ExportadorHTML implements FormatoExportador {
 
@@ -20,7 +21,7 @@ public class ExportadorHTML implements FormatoExportador {
             sb.append("<tr>")
               .append("<td>" + e.getItemCatalogo().getNombre() + "</td>")
               .append("<td>" + e.getUnidadesVendidas() + "</td>")
-              .append("<td>$" + String.format("%.2f", e.getPrecioPromedio()) + "</td>")
+              .append("<td>$" + String.format(Locale.US, "%.2f", e.getPrecioPromedio()) + "</td>")
               .append("</tr>");
         }
 

@@ -2,6 +2,7 @@ package reportes;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Locale;
 
 public class ExportadorTXT implements FormatoExportador{
 
@@ -16,7 +17,7 @@ public class ExportadorTXT implements FormatoExportador{
         sb.append("------------------------------------------------------------\n");
 
         for (Entrada e : entradas) {
-            sb.append(String.format("%-25s %-15d $%-15.2f\n", 
+        	sb.append(String.format(Locale.US, "%-25s %-15d $%-15.2f\n", 
                 e.getItemCatalogo().getNombre(), e.getUnidadesVendidas(), e.getPrecioPromedio()));
         }
         return sb.toString();

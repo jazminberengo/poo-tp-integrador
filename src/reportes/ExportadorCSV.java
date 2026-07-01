@@ -2,6 +2,7 @@ package reportes;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Locale;
 
 public class ExportadorCSV implements FormatoExportador {
 
@@ -17,7 +18,7 @@ public class ExportadorCSV implements FormatoExportador {
         for (Entrada e : entradas) {
             sb.append(e.getItemCatalogo().getNombre() + ";")
               .append(e.getUnidadesVendidas() + ";")
-              .append(String.format("%.2f", e.getPrecioPromedio()) + "\n");
+              .append(String.format(Locale.US, "%.2f", e.getPrecioPromedio()) + "\n");
         }
         return sb.toString();
     }
