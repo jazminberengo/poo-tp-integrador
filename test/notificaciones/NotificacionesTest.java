@@ -68,7 +68,7 @@ class NotificacionesTest {
     @BeforeEach
     void setUp() {
         Direccion direccion = new Direccion(
-                "Monteviedo",
+                "Montevideo",
                 "100",
                 "Bernal",
                 "Buenos Aires",
