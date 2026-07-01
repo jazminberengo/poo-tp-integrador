@@ -3,13 +3,14 @@ package reportes;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.HashMap;
 
 import catalogo.Paquete;
 import catalogo.Producto;
 
 public class VisitorItemsMasVendidos extends ReporteVisitor {
 
-	private Map<String, Entrada> entradas;
+	private Map<String, Entrada> entradas = new HashMap<String, Entrada>();
 	
 	@Override
 	public void visit(Producto producto) {

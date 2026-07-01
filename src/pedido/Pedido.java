@@ -213,4 +213,11 @@ public class Pedido {
 	public void setFechaCancelacion(LocalDate fechaCancelacion) {
 		this.fechaCancelacion = fechaCancelacion;
 	}
+	
+	public void setFechaEntrega(LocalDate fechaEntrega) {
+	    this.fechaEntrega = fechaEntrega;
+	}
+	public void setDireccion(Direccion direccion) {
+	    this.direccion = direccion;
+	}
 }

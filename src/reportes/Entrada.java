@@ -32,3 +32,11 @@ public class Entrada {
 	public ItemCatalogo getItemCatalogo() {	return itemCatalogo;	}
 	public float getPrecioPromedio() {	return precioPromedio;	}
 }
+
+
+
+
+
+
+
+
