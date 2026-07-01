@@ -27,10 +27,6 @@ public class Direccion {
 	    return codigoPostal;
 	}
 
-	@Override
-	public String toString() {
-	    return calle + " " + altura + ", " + ciudad + " (" + codigoPostal + ")";
-	}
 }
 
 
