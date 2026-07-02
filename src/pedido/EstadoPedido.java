@@ -1,5 +1,6 @@
 package pedido;
 
+import notificaciones.Observador;
 
 /*
  * Implementa patrón STATE. EstadoPedido es la interfaz que define todas las operaciones posibles sobre un pedido.
@@ -21,5 +22,10 @@ public interface EstadoPedido {
 	    throw new OperacionInvalidaException(
 	        "No se puede " + operacion + " en estado: " + this.getClass().getSimpleName()
 	    );
+	}
+	
+	// En EstadoPedido
+	default void notificarObservador(Observador observador, Pedido pedido, EstadoPedido anterior) {
+	    // por defecto no hace nada
 	}
 }

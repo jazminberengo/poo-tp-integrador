@@ -1,5 +1,7 @@
 package pedido;
 
+import notificaciones.Observador;
+
 /*
  * BORRADOR: el cliente está armando el pedido.
  * Operaciones válidas: agregar/quitar ítems, confirmar, cancelar.
@@ -30,4 +32,9 @@ public class EstadoBorrador implements EstadoPedido {
     	pedido.registrarFechaCancelacion();
         pedido.cambiarEstado(new EstadoCancelado());
     }
+    
+    @Override
+	public void notificarObservador(Observador observador, Pedido pedido, EstadoPedido anterior) {
+	    observador.onBorrador(pedido);
+	}
 }

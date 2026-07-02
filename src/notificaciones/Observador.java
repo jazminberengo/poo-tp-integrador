@@ -17,5 +17,13 @@ public interface Observador {
        anterior =  estado previo al cambio
        nuevo    =  estado al que transicionó
      */
-    void actualizar(Pedido pedido, EstadoPedido anterior, EstadoPedido nuevo);
+	
+	// Implementación default para respuesta a notificaciones: No hacer nada. 
+	// Si se debe hacer algo, se sobreescribe por cada implementación
+	default void onConfirmado(Pedido pedido) {}
+	default void onBorrador(Pedido pedido) {}
+	default void onPreparacion(Pedido pedido) {}
+    default void onEnviado(Pedido pedido) {}
+    default void onEntregado(Pedido pedido) {}
+    default void onCancelado(Pedido pedido) {}
 }

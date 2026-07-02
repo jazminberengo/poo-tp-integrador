@@ -1,5 +1,7 @@
 package pedido;
 
+import notificaciones.Observador;
+
 /*
  * CONFIRMADO: el cliente confirmó, stock decrementado.
  * Si fuese cancelado luego, se repone el stock y se reembolsa todo (productos + envío).
@@ -18,5 +20,10 @@ public class EstadoConfirmado implements EstadoPedido {
         pedido.generarNotaCredito(pedido.getTotal()); // reembolso total
         pedido.registrarFechaCancelacion();
         pedido.cambiarEstado(new EstadoCancelado());
+    }
+    
+    @Override
+    public void notificarObservador(Observador observador, Pedido pedido, EstadoPedido anterior) {
+        observador.onConfirmado(pedido);
     }
 }
