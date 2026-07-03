@@ -82,10 +82,9 @@ public class Pedido {
     // Los estados concretos llaman a los siguientes métodos para ejecutar la lógica
     // de dominio (stock, reembolso) antes de cambiar de estado.
 
-    public void cambiarEstado(EstadoPedido nuevoEstado) {
-        EstadoPedido anterior = this.estado;
+    protected void cambiarEstado(EstadoPedido nuevoEstado) { 
         this.estado = nuevoEstado;
-        notificar(anterior);
+        notificar(nuevoEstado); // se notifica el nuevo estado
     }
 
     // Decrementa el stock de todos los ítems.
@@ -148,7 +147,7 @@ public class Pedido {
         observadores.remove(observador);
     }
 
-    public void notificar(EstadoPedido estadoAnterior) { // Notifica a todos los observadores del cambio de estado.
+    public void notificar(EstadoPedido estado) { // Notifica a todos los observadores del cambio de estado.
         for (Observador o : observadores) {
             estado.notificarObservador(o,this); // se delega a cada estado la implementación
         }

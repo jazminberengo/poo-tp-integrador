@@ -32,9 +32,4 @@ public class EstadoBorrador implements EstadoPedido {
     	pedido.registrarFechaCancelacion();
         pedido.cambiarEstado(new EstadoCancelado());
     }
-    
-    @Override
-	public void notificarObservador(Observador observador, Pedido pedido) {
-	    observador.onBorrador(pedido);
-	}
 }

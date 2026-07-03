@@ -12,9 +12,4 @@ public class EstadoEnPreparacion implements EstadoPedido {
     public void enviar(Pedido pedido) {
         pedido.cambiarEstado(new EstadoEnviado());
     }
-    
-    @Override
-    public void notificarObservador(Observador observador, Pedido pedido) {
-        observador.onPreparacion(pedido);
-    }
 }

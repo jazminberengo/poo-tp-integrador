@@ -14,8 +14,6 @@ public interface Observador {
 	 *  Si se debe hacer algo, se sobreescribe por cada implementación
 	 */
 	default void onConfirmado(Pedido pedido) {}
-	default void onBorrador(Pedido pedido) {}
-	default void onPreparacion(Pedido pedido) {}
     default void onEnviado(Pedido pedido) {}
     default void onEntregado(Pedido pedido) {}
     default void onCancelado(Pedido pedido) {}
