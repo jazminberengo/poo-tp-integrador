@@ -1,7 +1,5 @@
 package pedido;
 
-import notificaciones.Observador;
-
 /*
  * BORRADOR: el cliente está armando el pedido.
  * Operaciones válidas: agregar/quitar ítems, confirmar, cancelar.

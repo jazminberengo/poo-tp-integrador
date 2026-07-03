@@ -1,7 +1,5 @@
 package pedido;
 
-import notificaciones.Observador;
-
 /*
  * EN PREPARACION: el depósito está preparando el envío.
  * Solo puede avanzar a ENVIADO. No puede cancelarse.
