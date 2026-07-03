@@ -10,7 +10,7 @@ public class EstadoCancelado implements EstadoPedido {
     // cualquier operación sobre el pedido lanza OperacionInvalidaException
 	
 	@Override
-	public void notificarObservador(Observador observador, Pedido pedido, EstadoPedido anterior) {
+	public void notificarObservador(Observador observador, Pedido pedido) {
 	    observador.onCancelado(pedido);
 	}
 }

@@ -14,7 +14,7 @@ public class EstadoEnPreparacion implements EstadoPedido {
     }
     
     @Override
-    public void notificarObservador(Observador observador, Pedido pedido, EstadoPedido anterior) {
+    public void notificarObservador(Observador observador, Pedido pedido) {
         observador.onPreparacion(pedido);
     }
 }

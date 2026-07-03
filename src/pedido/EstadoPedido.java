@@ -25,7 +25,7 @@ public interface EstadoPedido {
 	}
 	
 	// En EstadoPedido
-	default void notificarObservador(Observador observador, Pedido pedido, EstadoPedido anterior) {
+	default void notificarObservador(Observador observador, Pedido pedido) {
 	    // por defecto no hace nada
 	}
 }

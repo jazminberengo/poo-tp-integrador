@@ -150,7 +150,7 @@ public class Pedido {
 
     public void notificar(EstadoPedido estadoAnterior) { // Notifica a todos los observadores del cambio de estado.
         for (Observador o : observadores) {
-            o.actualizar(this, estadoAnterior, this.estado);
+            estado.notificarObservador(o,this); // se delega a cada estado la implementación
         }
     }
     

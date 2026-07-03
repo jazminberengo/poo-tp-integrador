@@ -34,7 +34,7 @@ public class EstadoBorrador implements EstadoPedido {
     }
     
     @Override
-	public void notificarObservador(Observador observador, Pedido pedido, EstadoPedido anterior) {
+	public void notificarObservador(Observador observador, Pedido pedido) {
 	    observador.onBorrador(pedido);
 	}
 }

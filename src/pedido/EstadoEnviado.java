@@ -23,7 +23,7 @@ public class EstadoEnviado implements EstadoPedido {
     }
     
     @Override
-    public void notificarObservador(Observador observador, Pedido pedido, EstadoPedido anterior) {
+    public void notificarObservador(Observador observador, Pedido pedido) {
         observador.onEnviado(pedido);
     }
 }

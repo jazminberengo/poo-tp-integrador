@@ -6,10 +6,8 @@ import java.time.LocalDate;
 public class GeneradorFactura implements Observador {
 
     @Override
-    public void actualizar(Pedido pedido, EstadoPedido anterior, EstadoPedido nuevo) {
-        if (nuevo instanceof EstadoEntregado) {
+    public void onEntregado(Pedido pedido) {
             emitirFactura(pedido);
-        }
     }
 
     private void emitirFactura(Pedido pedido) {
