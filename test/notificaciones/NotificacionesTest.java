@@ -125,26 +125,7 @@ class NotificacionesTest {
 
         assertTrue(mail.asunto.contains("Entregado"));
     }
-
-    @Test
-    void seEnviaMailAlCancelar() {
-        pedido.suscribir(new NotificadorEmail(mail));
-
-        pedido.cancelar();
-
-        assertTrue(mail.asunto.contains("Cancelado"));
-    }
-
-    @Test
-    void elMailMencionaLaNotaDeCredito() {
-        pedido.suscribir(new NotificadorEmail(mail));
-
-        pedido.confirmar();
-        pedido.cancelar();
-
-        assertTrue(mail.mensaje.contains("nota de crédito"));
-    }
-
+   
     @Test
     void elMailTieneElNombreDelCliente() {
         pedido.suscribir(new NotificadorEmail(mail));

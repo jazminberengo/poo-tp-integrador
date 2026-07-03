@@ -10,6 +10,7 @@ import envios.Direccion;
 import envios.MetodoEnvio;
 import envios.Registro;
 import envios.Sucursal;
+import notificaciones.Observador;
 import reportes.ItemVisitor;
 
 class PedidoTest {
@@ -165,9 +166,12 @@ class PedidoTest {
     void observadorRecibeNotificacion() {
         int[] llamadas = {0};
 
-        pedido.suscribir(
-                (p, anterior, nuevo) -> llamadas[0]++
-        );
+        pedido.suscribir(new Observador() {
+            @Override
+            public void onConfirmado(Pedido p) {
+                llamadas[0]++;
+            }
+        });
 
         pedido.agregarItem(item1, 1);
         pedido.confirmar();
